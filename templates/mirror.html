@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ubermelon Form Processor</title>
+  <link rel="stylesheet"
+        href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div class="page-header">
+        <h1>Ubermelon Order System</h1>
+
+        <p class="lead">We&rsquo;re disrupting the melonconomy.</p>
+      </div>
+
+      <p>Dear {{ firstname }} {{ lastname }},</p>
+
+      <p>
+        Thank you for your order of {{ quantity }} flats of
+        {{ melontype }} melons.
+      </p>
+
+      <p>
+        {% if time=='am' %}
+          We will arrive promptly at 2 in the morning with your
+          melons. Please have coffee prepared for our delivery person.
+        {% elif time=='pm' %}
+          We will shuffle over sometime just before midnight. Make
+          sure to leave a porch light on.
+        {% elif time=='wat' %}
+          We will arrive during a leapsecond and leave via a magical unicorn.
+        {% else %}
+          We didn't understand your delivery time request, though.
+        {% endif %}
+      </p>
+
+      <p>
+        {% if returning %}
+          We're always delighted to work with returning customers like
+          yourself.
+        {% else %}
+          Of course, we are curious why you've never ordered from us before.
+          You're not a Squiysh employee, are you?!
+        {% endif %}
+      </p>
+
+      <p>We take special pride in our outreach to the {{ stats }}
+        community.</p>
+
+      <p>
+        As you ordered {{ quantity }} flats, at our per-pound price,
+        your total will be $1,042,042.
+      </p>
+
+      <p>Thank you!</p>
+
+      <p>Jenny &ldquo;Seedless&rdquo; Jefferson,<br>Sales Manager</p>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-6">
+      <h2 style="margin-top: 3em">
+        <i class="glyphicon glyphicon-search"></i>
+        Debug Information</h2>
+
+      <p>You made a {{ method }} request, and the following form data was
+        received:</p>
+      <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for k, v in data.items() | sort %}
+          <tr>
+            <td>{{ k }}</td>
+            <td>{{ v }}</td>
+          </tr>
+        {% endfor %}
+
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
