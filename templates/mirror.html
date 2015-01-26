@@ -48,8 +48,13 @@
         {% endif %}
       </p>
 
-      <p>We take special pride in our outreach to the {{ stats }}
-        community.</p>
+      <p>We take special pride in our outreach to the
+        {% for c in data.getlist('stats') %}
+        {{ c }}{% if not loop.last and loop.length > 2 %},{% endif %}
+        {% if loop.index == loop.length-1 %}and{% endif %}
+        {% endfor %}
+        {% if data.getlist('stats') | length ==1 %}community{% else %}communities{% endif %}.
+      </p>
 
       <p>
         As you ordered {{ quantity }} flats, at our per-pound price,
@@ -72,13 +77,15 @@
         <tr>
           <th>Name</th>
           <th>Value</th>
+          <th>As a List</th>
         </tr>
         </thead>
         <tbody>
         {% for k, v in data.items() | sort %}
           <tr>
             <td>{{ k }}</td>
-            <td>{{ v }}</td>
+            <td>{{ "%r" | format(v) }}</td>
+            <td>{{ data.getlist(k) }}</td>
           </tr>
         {% endfor %}
 
