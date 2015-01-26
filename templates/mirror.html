@@ -39,7 +39,7 @@
       </p>
 
       <p>
-        {% if returning %}
+        {% if returning=='yes' %}
           We're always delighted to work with returning customers like
           yourself.
         {% else %}
@@ -50,8 +50,8 @@
 
       <p>We take special pride in our outreach to the
         {% for c in data.getlist('stats') %}
-        {{ c }}{% if not loop.last and loop.length > 2 %},{% endif %}
-        {% if loop.index == loop.length-1 %}and{% endif %}
+          {{ c }}{% if not loop.last and loop.length > 2 %},{% endif %}
+          {% if loop.index == loop.length-1 %}and{% endif %}
         {% endfor %}
         {% if data.getlist('stats') | length ==1 %}community{% else %}communities{% endif %}.
       </p>
@@ -83,7 +83,7 @@
         <tbody>
         {% for k, v in data.items() | sort %}
           <tr>
-            <td>{{ k }}</td>
+            <td><b>{{ k }}</b></td>
             <td>{{ "%r" | format(v) }}</td>
             <td>{{ data.getlist(k) }}</td>
           </tr>
